@@ -1,5 +1,5 @@
-Flask
-mysql-connector-python
-Flask-Mail
 gunicorn
+Flask
+Flask-Mail
+mysql-connector-python
 python-dotenv
