@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | SAASC College</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <script src="https://kit.fontawesome.com/0b9f8f8c71.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+      padding: 40px 20px;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: #00796b;
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      padding: 50px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00796b;
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info, .contact-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .contact-item i {
+      font-size: 1.6rem;
+      color: #00796b;
+      margin-right: 15px;
+    }
+
+    .contact-item a, .contact-item span {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background-color: #00796b;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background-color: #004d40;
+    }
+
+    .college-hours {
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .status-message {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .status-success {
+      color: green;
+    }
+
+    .status-error {
+      color: red;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <h1>SAASC College</h1>
+    <nav>
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('faculty') }}">Faculty</a>
+  <a href="{{ url_for('admin') }}">Admin</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+</nav>
+  </div>
+
+  <div class="container">
+    <h2><i class="fas fa-address-book"></i> Contact SAASC College</h2>
+
+    {% if success %}
+      <p class="status-message status-success">{{ success }}</p>
+    {% elif error %}
+      <p class="status-message status-error">{{ error }}</p>
+    {% endif %}
+
+    <div class="grid">
+      <!-- Left Side -->
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+919486340965">+91 94863 40965</a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:sanjaykavish6@gmail.com">sanjaykavish6@gmail.com</a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span class="address">Nelson Road, Thiruvanikovil, Trichy - 620008</span>
+        </div>
+
+        <div class="college-hours">
+          <h4><i class="fas fa-clock"></i> College Hours:</h4>
+          <p>Mon – Fri: 9:00 AM – 5:00 PM</p>
+          <p>Saturday: 9:00 AM – 1:00 PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+
+        <div class="map">
+          <iframe 
+            src="https://www.google.com/maps?q=SAASC+College+Trichy&output=embed" 
+            allowfullscreen 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Right Side: Contact Form -->
+      <div class="contact-form">
+        <form method="POST" action="/contact">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+          <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

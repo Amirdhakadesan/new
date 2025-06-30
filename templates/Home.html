@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAASC College Portal</title>
+  <style>
+    :root {
+      --primary-color: #00796b;
+      --secondary-color: #004d40;
+      --accent-color: #e0f2f1;
+      --light-color: #ffffff;
+      --dark-text: #222;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    /* Header with Hero Image */
+    header {
+      background: linear-gradient(rgba(0,79,64,0.7), rgba(0,79,64,0.7)),
+        url('https://images.unsplash.com/photo-1601933470928-cd994d40fd3c') no-repeat center/cover;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      font-weight: 300;
+    }
+
+    /* Sticky Navigation */
+    nav {
+      background-color: var(--secondary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #00695c;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--light-color);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 22px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #004d40;
+    }
+
+    footer {
+      background-color: var(--secondary-color);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        padding: 10px 0;
+      }
+
+      nav a {
+        margin: 8px 0;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SAASC College Portal</h1>
+  <p>Empowering Students | Enabling Success | Excellence in Education</p>
+</header>
+
+<nav>
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('faculty') }}">Faculty</a>
+  <a href="{{ url_for('admin') }}">Admin</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+</nav>
+
+<div class="container">
+
+<div class="card">
+    <h2>🎓 Welcome to SAASC</h2>
+    <p>Welcome to SAASC College, where innovation meets excellence. We're proud to shape future leaders through a nurturing academic environment and cutting-edge facilities.</p>
+    <p>Our institution is accredited with a <strong>NAAC A+ grade</strong> and stands as a symbol of academic integrity and global vision.</p>
+    <p>Be a part of our journey and unleash your potential!</p>
+  </div>
+
+  <div class="card">
+    <h2>📅 Upcoming Events</h2>
+    <ul>
+      <li><strong>June 20</strong> – Orientation Day</li>
+      <li><strong>July 01</strong> – Classes Begin</li>
+      <li><strong>July 15</strong> – Fresher’s Day</li>
+      <li><strong>August 24</strong> – Sport's Day</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 SAASC College. All rights reserved.
+</footer>
+
+</body>
+</html>

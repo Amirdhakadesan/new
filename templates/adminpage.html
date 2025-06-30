@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef3f7;
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar */
+    .navbar {
+      background-color: #00796b;
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+      color: white;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 90%;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+    }
+    .login-form {
+      max-width: 300px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .login-form button {
+      padding: 10px 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #00796b;
+      color: white;
+    }
+    .actions a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #00796b;
+      font-weight: bold;
+    }
+    .actions a:hover {
+      text-decoration: underline;
+    }
+    .logout {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .add-button {
+      text-align: right;
+      margin-bottom: 15px;
+    }
+    .add-button a {
+      background-color: #00796b;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .add-button a:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <h1>SAASC College</h1>
+    <nav>
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('faculty') }}">Faculty</a>
+  <a href="{{ url_for('admin') }}">Admin</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+</nav>
+  </div>
+<div class="container">
+  {% if logged_in %}
+    <h1>Admin Dashboard</h1>
+
+    <div class="add-button">
+      <a href="{{ url_for('add_faculty') }}">+ Add Faculty</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Title</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in faculty %}
+        <tr>
+          <td>{{ f.id }}</td>
+          <td>{{ f.name }}</td>
+          <td>{{ f.dept }}</td>
+          <td>{{ f.title }}</td>
+          <td class="actions">
+            <a href="{{ url_for('edit_faculty', faculty_id=f.id) }}">Edit</a>
+            <a href="{{ url_for('delete_faculty', faculty_id=f.id) }}" onclick="return confirm('Are you sure you want to delete this faculty?');">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="logout">
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+  {% else %}
+    <h1>Admin Login</h1>
+    <form method="POST" class="login-form">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+    </form>
+  {% endif %}
+</div>
+
+</body>
+</html>
