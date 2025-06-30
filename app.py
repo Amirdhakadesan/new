@@ -1,25 +1,30 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 from flask_mail import Mail, Message
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Required for session management
+app.secret_key = os.getenv('SECRET_KEY')
 
 # MySQL Database Configuration
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="amirth"
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME")
 )
 
-# SMTP Email Configuration (Example: Gmail)
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'sanjaykavish6@gmail.com'       # Change to your Gmail
-app.config['MAIL_PASSWORD'] = 'hqfu gkzu bfbx seec'          # App-specific password
-app.config['MAIL_DEFAULT_SENDER'] = 'sanjaykavish6@gmail.com' # Change to your Gmail
+# SMTP Email Configuration
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
 mail = Mail(app)
 
@@ -44,12 +49,12 @@ def contact():
 
         try:
             msg = Message(subject=f"New Contact Message from {name}",
-                          recipients=['sanjaykavish6@gmail.com'])  # Change to your destination email
+                          recipients=[app.config['MAIL_USERNAME']])
             msg.body = f"From: {name} <{email}>\n\nMessage:\n{message}"
             mail.send(msg)
             return render_template('Contact.html', success="Your message has been sent successfully.")
         except Exception as e:
-            print(e)  # For debugging
+            print(e)
             return render_template('Contact.html', error="Failed to send message. Please try again later.")
 
     return render_template('Contact.html')
